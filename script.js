@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Preload hero image via JS to guarantee immediate display from cache
+    const img = new Image();
+    img.src = 'background.png';
+
     // 1. Fade-up Animations via Intersection Observer
     const fadeElements = document.querySelectorAll('.fade-up');
     
@@ -106,10 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clamp to strictly prevent overshooting
         targetProgress = Math.max(0, Math.min(1, targetProgress));
 
-        if (Math.abs(targetProgress - currentProgress) < 0.001) {
-            // Snap to target and stop loop
+        if (Math.abs(targetProgress - currentProgress) < 0.0005) {
+            // Snap to target and stop loop precisely
             currentProgress = targetProgress;
             isAnimating = false;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
         } else {
             // Faster lerp calculation for snappier response
             currentProgress += (targetProgress - currentProgress) * 0.12;

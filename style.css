@@ -230,8 +230,8 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     cursor: pointer;
     z-index: 1;
-    will-change: left, transform; /* Hardware acceleration */
-    transform: translateZ(0); /* Force GPU compositing */
+    will-change: transform; /* Hardware acceleration */
+    backface-visibility: hidden; /* Force GPU rendering */
 }
 
 .work-card:hover {
