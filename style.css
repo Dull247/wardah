@@ -1,0 +1,361 @@
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-ExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WardahFont';
+    src: url('wardah_font/nastaliq/itfGhroobNastaliq-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+:root {
+    --bg-color: #FAFAFE;
+    --accent: #5B50C8;
+    --text-dark: #2A2A35;
+    --text-muted: #8E8E9F;
+    --white: #FFFFFF;
+    --card-shadow: 0 20px 40px rgba(91, 80, 200, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'WardahFont', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+::selection {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
+    color: var(--accent);
+}
+
+/* Animations */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: opacity, transform;
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 0;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid rgba(91, 80, 200, 0.1);
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    padding: 16px 0;
+    background-color: rgba(250, 250, 254, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.nav-container {
+    max-width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    direction: ltr;
+}
+
+.nav-brand {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #9788EB;
+}
+
+.nav-copy {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: #9991D8;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    margin-top: 88px;
+    height: calc(100vh - 88px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #F0EEFF; /* Fallback color as requested */
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    opacity: 0.5;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 10px); }
+}
+
+/* Works Section (Horizontal Scroll) */
+.works {
+    margin: 0 !important;
+    padding: 80px 0 0 0 !important;
+    position: relative;
+}
+
+.container {
+    max-width: 100%; /* Take full width for the scrolling gallery */
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.section-title {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 60px;
+}
+
+.works-scroll-wrapper {
+    /* Set height to allow vertical scrolling */
+    min-height: 300vh;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    touch-action: pan-y;
+}
+
+.works-sticky {
+    position: sticky;
+    top: 120px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    direction: ltr; /* Forces native scroll to start at the left edge */
+    /* Hide scrollbar for clean UI */
+    scrollbar-width: none; /* Firefox */
+}
+.works-sticky::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.works-gallery {
+    position: relative;
+    height: 500px;
+    width: 5290px; /* 14 cards (350px) + 13 gaps (30px) */
+}
+
+/* Work Cards */
+.work-card {
+    position: absolute;
+    top: 0;
+    width: 350px;
+    height: 466px; /* Portrait rectangle */
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    cursor: pointer;
+    z-index: 1;
+    will-change: left, transform; /* Hardware acceleration */
+    transform: translateZ(0); /* Force GPU compositing */
+}
+
+.work-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--card-shadow);
+    z-index: 20 !important; /* Bring to very front on hover */
+}
+
+.work-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-gray);
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+}
+
+.work-card:hover .work-img-placeholder {
+    transform: scale(1.05);
+}
+
+/* Muted elegant gradients for placeholders since we don't have images */
+.c1 { background: linear-gradient(135deg, #E6E1F9, #D4CFF4); }
+.c2 { background: linear-gradient(135deg, #F0E6EF, #E1D2DF); }
+.c3 { background: linear-gradient(135deg, #EAE5F5, #D1CBE6); }
+.c4 { background: linear-gradient(135deg, #F5F0F6, #E0D5E6); }
+.c5 { background: linear-gradient(135deg, #DFD9F2, #C8BFE6); }
+.c6 { background: linear-gradient(135deg, #EBE6F7, #D6CEEC); }
+.c7 { background: linear-gradient(135deg, #F3EEF5, #DFD2E3); }
+.c8 { background: linear-gradient(135deg, #E8E2F6, #CEC2E8); }
+.c9 { background: linear-gradient(135deg, #EDE5F4, #D6CBE5); }
+.c10 { background: linear-gradient(135deg, #F2EDF8, #E2D7EE); }
+
+/* Partners Section */
+.partners {
+    margin: 0;
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(91, 80, 200, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.partners-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 60px;
+}
+
+.marquee-wrapper {
+    overflow: hidden;
+    user-select: none;
+    /* In RTL, standard marquee needs specific setup */
+    direction: ltr; /* Force LTR for the marquee animation so it flows continuously */
+}
+
+.marquee-track {
+    display: flex;
+    width: 200%;
+    will-change: transform;
+    animation: scroll-right 20s linear infinite;
+}
+
+.marquee {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+    gap: 60px;
+    padding-right: 60px;
+}
+
+@keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+}
+
+.partner-logo {
+    width: 180px;
+    height: 80px;
+    background-color: #F8F8FC;
+    border-radius: 12px;
+    border: 1px solid rgba(91, 80, 200, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.partner-logo:hover {
+    background-color: #F0EDF9;
+}
+
+/* Footer */
+.footer {
+    padding: 60px 0 40px;
+    background-color: var(--bg-color);
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    height: 40px;
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.footer-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-logo-text { display: none; } /* Show only logo on mobile */
+    .work-card { width: 280px; height: 373px; margin-left: -20px; }
+    .partners-title { font-size: 1.5rem; }
+}
