@@ -28,8 +28,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar');
     const worksSection = document.querySelector('.works-scroll-wrapper');
     const worksGallery = document.getElementById('works-gallery');
+    
+    // Dynamically inject 14 cards for maximum performance
+    const totalCards = 14;
+    const cardImages = [
+        'pic 1.jpg', 'pic 2.jpg', 'pic 3.gif', 'pic 4.png', 'pic 5.jpg',
+        'pic 6.jpg', 'pic 7.jpg', 'pic8.gif', 'pic 9.jpg'
+    ];
+    
+    for (let i = 0; i < totalCards; i++) {
+        const card = document.createElement('div');
+        card.className = 'work-card';
+        
+        if (i < 9) {
+            const img = document.createElement('img');
+            img.src = cardImages[i];
+            img.className = 'work-img-placeholder';
+            img.alt = `Work ${i + 1}`;
+            card.appendChild(img);
+        } else {
+            const placeholder = document.createElement('div');
+            const placeholderClasses = ['c10', 'c3', 'c5', 'c7', 'c1'];
+            placeholder.className = `work-img-placeholder ${placeholderClasses[i - 9]}`;
+            card.appendChild(placeholder);
+        }
+        
+        worksGallery.appendChild(card);
+    }
+
     const cards = document.querySelectorAll('.work-card');
-    const totalCards = cards.length;
     
     // Math Constants
     const CARD_WIDTH = 350;

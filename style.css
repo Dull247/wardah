@@ -354,6 +354,27 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
 }
 
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.social-link, .social-divider {
+    color: #9788EB;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--text-dark);
+}
+
 .footer-text {
     font-size: 0.85rem;
     color: var(--text-muted);
