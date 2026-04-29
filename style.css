@@ -228,21 +228,23 @@ h1, h2, h3, h4, h5, h6 {
 .work-card {
     position: absolute;
     top: 0;
+    left: 0;
     width: 350px;
     height: 466px; /* Portrait rectangle */
     border-radius: 20px;
     overflow: hidden;
     background-color: var(--white);
     box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    transition: box-shadow 0.4s ease; /* Remove transform from CSS transition so JS handles it instantly */
     cursor: pointer;
     z-index: 1;
     will-change: transform; /* Hardware acceleration */
     backface-visibility: hidden; /* Force GPU rendering */
+    transform: translate3d(var(--tx, 0px), 0, 0); /* 100% GPU compositor math */
 }
 
 .work-card:hover {
-    transform: translateY(-15px) scale(1.02);
+    transform: translate3d(var(--tx, 0px), -15px, 0) scale(1.02);
     box-shadow: var(--card-shadow);
     z-index: 20 !important; /* Bring to very front on hover */
 }

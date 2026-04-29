@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         leftEnd[i] = i * STACK_OVERLAP;
 
         if (cards[i]) {
-            cards[i].style.left = `${leftStart[i]}px`;
+            cards[i].style.setProperty('--tx', `${leftStart[i]}px`);
             // Z-index: highest on the last card (index 13 gets 14, index 0 gets 1)
             cards[i].style.zIndex = i + 1;
         }
@@ -157,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cards[i]) {
                 // Starts spread (progress=0), collapses to left-anchored stack (progress=1)
                 const currentLeft = leftStart[i] + currentProgress * (leftEnd[i] - leftStart[i]);
-                cards[i].style.left = `${currentLeft}px`;
+                // Use CSS variable to enforce GPU hardware acceleration instead of slow 'left' repaints
+                cards[i].style.setProperty('--tx', `${currentLeft}px`);
             }
         }
         
