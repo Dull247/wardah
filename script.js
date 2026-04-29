@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 0. Preload hero image via JS to guarantee immediate display from cache
     const img = new Image();
+    img.decoding = 'async';
     img.src = 'background.png';
 
     // 1. Fade-up Animations via Intersection Observer
