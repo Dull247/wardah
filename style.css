@@ -146,31 +146,36 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
     position: relative;
     margin-top: 88px;
-    height: calc(100vh - 88px);
+    height: 70vh;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-color: #F0EEFF; /* Fallback color as requested */
+    background-color: #F0EEFF;
     background-image: url('background.png');
     background-size: cover;
     background-position: center;
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--accent);
-    opacity: 0.5;
-    animation: bounce 2s infinite ease-in-out;
+/* Intro Text Section */
+.intro-text {
+    padding: 100px 0;
+    background-color: var(--white);
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, 10px); }
+.intro-headline {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #9788EB;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.intro-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 0 0; /* Aligned to the left */
+    text-align: left;
+    line-height: 1.6;
 }
 
 /* Works Section (Horizontal Scroll) */
@@ -195,13 +200,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .works-scroll-wrapper {
-    /* Set height to allow vertical scrolling */
-    min-height: 300vh;
     position: relative;
     margin-top: 40px;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
     touch-action: pan-y;
+    /* min-height is set per-device below */
 }
 
 .works-sticky {
@@ -220,8 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .works-gallery {
     position: relative;
-    height: 500px;
-    width: 5290px; /* 14 cards (350px) + 13 gaps (30px) */
+    /* width and height are set per-device below */
 }
 
 /* Work Cards */
@@ -229,12 +232,13 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 350px;
-    height: 466px; /* Portrait rectangle */
+    width: 500px !important;
+    height: 620px !important;
     border-radius: 20px;
     overflow: hidden;
-    background-color: var(--white);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    background-color: transparent !important; /* Remove white background/padding */
+    padding: 0 !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     transition: box-shadow 0.4s ease; /* Remove transform from CSS transition so JS handles it instantly */
     cursor: pointer;
     z-index: 1;
@@ -252,7 +256,8 @@ h1, h2, h3, h4, h5, h6 {
 .work-img-placeholder {
     width: 100%;
     height: 100%;
-    background-color: var(--light-gray);
+    background-color: #E8E4F0 !important; /* Force soft gray background on empty cards */
+    background-image: none !important; /* Strip gradient classes */
     background-size: cover;
     background-position: center;
     object-fit: cover;
@@ -274,61 +279,20 @@ h1, h2, h3, h4, h5, h6 {
 .c9 { background: linear-gradient(135deg, #EDE5F4, #D6CBE5); }
 .c10 { background: linear-gradient(135deg, #F2EDF8, #E2D7EE); }
 
-/* Partners Section */
-.partners {
-    margin: 0;
+/* About Us Section */
+.about-us {
     padding: 80px 0;
-    border-bottom: 1px solid rgba(91, 80, 200, 0.1);
-    overflow: hidden;
-    position: relative;
+    background-color: var(--bg-color);
 }
 
-.partners-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 60px;
-}
-
-.marquee-wrapper {
-    overflow: hidden;
-    user-select: none;
-    /* In RTL, standard marquee needs specific setup */
-    direction: ltr; /* Force LTR for the marquee animation so it flows continuously */
-}
-
-.marquee-track {
-    display: flex;
-    width: 200%;
-    will-change: transform;
-    animation: scroll-right 20s linear infinite;
-}
-
-.marquee {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-around;
-    width: 50%;
-    gap: 60px;
-    padding-right: 60px;
-}
-
-@keyframes scroll-right {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0%); }
-}
-
-.partner-logo {
-    width: 180px;
-    height: 80px;
-    background-color: #F8F8FC;
-    border-radius: 12px;
-    border: 1px solid rgba(91, 80, 200, 0.05);
-    transition: background-color 0.3s ease;
-}
-
-.partner-logo:hover {
-    background-color: #F0EDF9;
+.about-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 0 0 auto; /* Aligned to the right */
+    text-align: right;
 }
 
 /* Footer */
@@ -383,9 +347,74 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-logo-text { display: none; } /* Show only logo on mobile */
-    .work-card { width: 280px; height: 373px; margin-left: -20px; }
-    .partners-title { font-size: 1.5rem; }
+/* Mobile styles — only applied when JS detects a real phone/tablet via userAgent */
+body.is-mobile .nav-logo-text { display: none; }
+
+body.is-mobile .intro-subtitle,
+body.is-mobile .about-text {
+    text-align: center;
+    margin: 0 auto;
+}
+
+body.is-mobile .section-title {
+    margin-bottom: 20px;
+}
+
+body.is-mobile .works-gallery {
+    width: 500px !important;
+    height: 470px !important;   /* two rows: 220px + 12px gap + 220px + padding */
+}
+
+body.is-mobile .works-sticky {
+    top: 0px !important;
+    min-height: 470px !important;
+}
+
+body.is-mobile .works-scroll-wrapper {
+    min-height: 200vh !important;
+}
+
+body.is-mobile .hero {
+    height: 65vw;
+    min-height: unset;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #F0EEFF;
+}
+
+body.is-mobile .work-card {
+    width: 160px !important;
+    height: 220px !important;
+}
+
+/* Mobile Footer */
+body.is-mobile .footer { padding: 20px 0 !important; }
+body.is-mobile .footer-logo { display: none !important; }
+body.is-mobile .footer-content { gap: 8px !important; }
+body.is-mobile .footer-socials { margin: 0 !important; }
+body.is-mobile .social-link,
+body.is-mobile .social-divider {
+    font-size: 12px !important;
+    color: #9788EB !important;
+}
+body.is-mobile .footer-text { font-size: 0 !important; }
+body.is-mobile .footer-text::after {
+    content: "٢٠٢٦© وردة استوديو";
+    font-size: 10px;
+    color: var(--text-muted);
+    display: block;
+}
+
+/* ============================================================
+   DESKTOP ONLY — body:not(.is-mobile) ensures these NEVER
+   apply to phones. Zero overlap with mobile styles.
+   ============================================================ */
+body:not(.is-mobile) .works-gallery {
+    width: 8000px !important;   /* 14 cards × 540px STRIDE + 500px last card */
+    height: 680px !important;   /* fits 620px tall desktop cards */
+}
+
+body:not(.is-mobile) .works-scroll-wrapper {
+    min-height: 300vh !important;
 }
