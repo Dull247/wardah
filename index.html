@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" as="image" href="background.png" fetchpriority="high">
     <title>وردة استوديو | Wardah Studio</title>
     <meta name="description" content="وردة استوديو - استوديو هوية بصرية وعلامات تجارية في المملكة العربية السعودية.">
-    <link rel="preload" as="image" href="background.png" fetchpriority="high">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,7 +21,9 @@
 
     <!-- Section 1: Hero Splash -->
     <header class="hero section fade-up">
-        <!-- Cinematic banner, purely visual -->
+        <img src="background.png" alt="وردة استوديو"
+             fetchpriority="high" loading="eager"
+             style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:0;">
     </header>
 
     <!-- Section 2: Intro Text -->

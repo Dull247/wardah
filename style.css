@@ -148,10 +148,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 88px;
     height: 70vh;
     width: 100%;
-    background-color: #F0EEFF;
-    background-image: url('background.png');
-    background-size: cover;
-    background-position: center;
+    background-color: #F0EEFF; /* shows while img loads */
+    overflow: hidden;
 }
 
 /* Intro Text Section */
@@ -361,31 +359,26 @@ body.is-mobile .section-title {
 }
 
 body.is-mobile .works-gallery {
-    width: 500px !important;
-    height: 470px !important;   /* two rows: 220px + 12px gap + 220px + padding */
+    height: 310px !important;   /* single row: 250px card + padding */
 }
 
 body.is-mobile .works-sticky {
-    top: 0px !important;
-    min-height: 470px !important;
+    top: 60px !important;
+    min-height: 310px !important;
 }
 
 body.is-mobile .works-scroll-wrapper {
-    min-height: 200vh !important;
+    min-height: 130vh !important;
 }
 
 body.is-mobile .hero {
     height: 65vw;
     min-height: unset;
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: #F0EEFF;
 }
 
 body.is-mobile .work-card {
-    width: 160px !important;
-    height: 220px !important;
+    width: 200px !important;
+    height: 250px !important;
 }
 
 /* Mobile Footer */
